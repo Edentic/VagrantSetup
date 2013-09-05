@@ -19,12 +19,12 @@ LAMP stack only
 ---------------
 
 Run the following command if you only want to setup a LAMP server without installing WordPress:
-`sh vagrantsetup init <dbname>` where <dbname> is the name of the database the server creates.
+`sh vagrantsetup init <dbname>` where `<dbname> is the name of the database the server creates.
 
 WordPress install
 -----------------
 Run the following command for installing the latest version of WordPress and setting it up on Vagrant:
-`sh vagrantsetup WPinit <projectname>` where <projectname> is the name of the WordPress installation.
+`sh vagrantsetup WPinit <projectname>` where `<projectname>` is the name of the WordPress installation.
 
 Access your server
 ==================
