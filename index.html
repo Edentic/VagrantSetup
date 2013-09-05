@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vagrantsetup by Edentic</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Vagrantsetup</h1>
+        <p>Make it easy to setup a new vagrant instance with LAMP stack and optional WP install</p>
+
+        <p class="view"><a href="https://github.com/Edentic/VagrantSetup">View the Project on GitHub <small>Edentic/VagrantSetup</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Edentic/VagrantSetup/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Edentic/VagrantSetup/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Edentic/VagrantSetup">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="vagrantsetup" class="anchor" href="#vagrantsetup"><span class="octicon octicon-link"></span></a>VagrantSetup</h1>
+
+<p>Make it easy to setup a new vagrant instance with LAMP stack and optional WP install</p>
+
+<h1>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+<ul>
+<li><a href="http://www.vagrantup.com/">Vagrant</a></li>
+<li>WGET</li>
+</ul><h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Download the files and place it in your project root folder.
+Open up your terminal and <code>cd</code> into your project directory.</p>
+
+<h2>
+<a name="lamp-stack-only" class="anchor" href="#lamp-stack-only"><span class="octicon octicon-link"></span></a>LAMP stack only</h2>
+
+<p>Run the following command if you only want to setup a LAMP server without installing WordPress:
+<code>sh vagrantsetup init &lt;dbname&gt;</code> where  is the name of the database the server creates.</p>
+
+<h2>
+<a name="wordpress-install" class="anchor" href="#wordpress-install"><span class="octicon octicon-link"></span></a>WordPress install</h2>
+
+<p>Run the following command for installing the latest version of WordPress and setting it up on Vagrant:
+<code>sh vagrantsetup WPinit &lt;projectname&gt;</code> where  is the name of the WordPress installation.</p>
+
+<h1>
+<a name="access-your-server" class="anchor" href="#access-your-server"><span class="octicon octicon-link"></span></a>Access your server</h1>
+
+<p>When the server is up and running, you can access your server on the IP <code>192.168.57.10</code> or on your local network using <code>&lt;your_machine_ip&gt;:8080</code>.</p>
+
+<h2>
+<a name="mysql--phpmyadmin" class="anchor" href="#mysql--phpmyadmin"><span class="octicon octicon-link"></span></a>MySQL &amp; PHPMyAdmin</h2>
+
+<p>You can access your database using the following credentials:
+<code>Usernmae: 'root'</code>
+<code>Password: 'dbadmin'</code>
+<code>Database: '&lt;dbname | projectname&gt;'</code></p>
+
+<p>You can access PHPMyAdmin on the ip <code>192.168.57.10/phpmyadmin</code>. Log in with the same credentials as MySQL.</p>
+
+<p><strong>Notice this server is a development server and is not intended for production use!</strong></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Edentic">Edentic</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
