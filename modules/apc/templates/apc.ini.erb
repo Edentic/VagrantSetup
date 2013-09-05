@@ -1,0 +1,26 @@
+;;;;;;;;;;;;;;;;;;;;;
+; Managed by Puppet ;
+;;;;;;;;;;;;;;;;;;;;;
+
+;  Options for the apc module
+;  http://www.php.net/manual/en/apc.configuration.php
+
+; Enable apc extension module
+extension=apc.so
+
+;  apc.enabled can be set to 0 to disable APC. This is primarily useful when APC
+;  is statically compiled into PHP, since there is no other way to disable it
+;  (when compiled as a DSO, the extension line in php.ini can just be commented-out).
+apc.enabled=<%= scope.lookupvar('apc::params::enabled') %>
+
+;  The size of each shared memory segment in MB. By default, some systems (including
+;  most BSD variants) have very low limits on the size of a shared memory segment.
+apc.shm_size=<%= scope.lookupvar('apc::params::shm_size') %>M
+
+;  The number of seconds a cache entry is allowed to idle in a slot in case this
+;  cache entry slot is needed by another entry. Leaving this at zero means that
+;  APC's cache could potentially fill up with stale entries while newer entries
+;  won't be cached. In the event of a cache running out of available memory, the
+;  cache will be completely expunged if ttl is equal to 0. Otherwise, if the ttl
+;  is greater than 0, APC will attempt to remove expired entries.
+apc.ttl=<%= scope.lookupvar('apc::params::ttl') %>

@@ -1,0 +1,12 @@
+#####################
+# Managed by Puppet #
+#####################
+# APC admin default Apache configuration
+
+Alias /apc <%= scope.lookupvar('apc::params::apc_admin_dir') %>/
+
+<Directory <%= scope.lookupvar('apc::params::apc_admin_dir') %>>
+	Options FollowSymLinks
+	DirectoryIndex apc.php
+</Directory>
+
