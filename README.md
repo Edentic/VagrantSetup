@@ -26,6 +26,12 @@ WordPress install
 Run the following command for installing the latest version of WordPress and setting it up on Vagrant:
 `sh vagrantsetup WPinit <projectname>` where `<projectname>` is the name of the WordPress installation.
 
+WordPress install including Edentic Base Theme
+----------------------------------------------
+If you want to make a WordPress install with Edentic Base Theme installed by defualt, you can use the commnad:
+`sh vagrantsetup WPinit <projectname> incbasetheme`. 
+The Base Theme will then be installed under `wp-content/themes/<projectnam>/`.
+
 Access your server
 ==================
 
