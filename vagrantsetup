@@ -16,6 +16,21 @@ function installWP {
 	cat ./templates/wp-config.php | sed -e "s/\${db_name}/$1/" -e "s/\${project_name}/$1/" > ./wp-config.php
 }
 
+function installEdenticBaseTheme {
+	echo "::: INSTALLING EDENTIC BASE THEME :::"
+	wget -O ./basetheme.zip https://github.com/Edentic/EdenticBaseTemplate/archive/master.zip
+	if [[ "$?" != "0" ]]
+	then
+  		echo "an error happened downloading Edentic Base Theme!"
+  		exit 1
+	fi
+	
+	unzip ./basetheme.zip -d ./wp-content/themes/$1
+	mv ./wp-content/themes/$1/EdenticBaseTemplate-master/* ./wp-content/themes/$1
+	rmdir ./wp-content/themes/$1/EdenticBaseTemplate-master
+	rm ./basetheme.zip
+}
+
 function setDBSettings {
 		echo "::: SETTING UP DATABSE :::"
 		cat ./templates/settings.pp | sed -e "s/\${db_name}/$1/" > ./manifests/settings.pp
@@ -52,6 +67,12 @@ case $1 in
   					echo "WordPress could not be installed!"
   					exit 1
 				fi
+
+				if [[ "$3" == "incbasetheme" ]]
+				then
+					installEdenticBaseTheme $2
+				fi
+
 				setDBSettings $2;
 				startVagrant;
 			fi
