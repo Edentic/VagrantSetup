@@ -30,7 +30,7 @@ WordPress install including Edentic Base Theme
 ----------------------------------------------
 If you want to make a WordPress install with Edentic Base Theme installed by defualt, you can use the commnad:
 `sh vagrantsetup WPinit <projectname> incbasetheme`. 
-The Base Theme will then be installed under `wp-content/themes/<projectnam>/`.
+The Base Theme will then be installed under `wp-content/themes/<projectname>/`.
 
 Access your server
 ==================
