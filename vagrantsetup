@@ -27,7 +27,7 @@ function installEdenticBaseTheme {
 	
 	unzip ./basetheme.zip -d ./wp-content/themes/$1
 	mv ./wp-content/themes/$1/EdenticBaseTemplate-master/* ./wp-content/themes/$1
-	rmdir ./wp-content/themes/$1EdenticBaseTemplate-master
+	rmdir ./wp-content/themes/$1/EdenticBaseTemplate-master
 	rm ./basetheme.zip
 }
 
@@ -61,11 +61,11 @@ case $1 in
             if [ "$2" = "" ]; then
                 echo No project name given!
             else
-				#installWP $2;
+				installWP $2;
 				if [[ "$?" != "0" ]]
 				then
   					echo "WordPress could not be installed!"
-  					#exit 1
+  					exit 1
 				fi
 
 				if [[ "$3" == "incbasetheme" ]]
@@ -73,8 +73,8 @@ case $1 in
 					installEdenticBaseTheme $2
 				fi
 
-				#setDBSettings $2;
-				#startVagrant;
+				setDBSettings $2;
+				startVagrant;
 			fi
 	;;
 
