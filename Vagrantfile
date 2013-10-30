@@ -22,6 +22,6 @@ Vagrant.configure("2") do |config|
   # using a specific IP.
   config.vm.network :private_network, ip: "192.168.57.10"
 
-  config.vm.synced_folder "", "/var/www", :group => 'www-data', :extra => "dmode=777,fmode=777"
-   config.vm.provision :puppet, :module_path => "modules"
+  config.vm.synced_folder "", "/var/www", :group => 'www-data', :mount_options => ["dmode=777", "fmode=777"]
+  config.vm.provision :puppet, :module_path => "modules"
 end
