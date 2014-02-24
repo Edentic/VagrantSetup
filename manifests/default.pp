@@ -20,7 +20,8 @@ include apache
 include php
 include mysql
 include phpmyadmin
-include ruby
+
+  class {'mailcatcher': }
 
   apache::vhost { 'edentic':
       port => '80',
