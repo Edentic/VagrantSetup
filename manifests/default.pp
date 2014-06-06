@@ -48,6 +48,10 @@ include phpmyadmin
     version => 'latest'
   }
 
+  class {'gulpjs':
+    install_node => false,
+  }
+
   #Setup apache
   apache::vhost { 'edentic':
       port => '80',
