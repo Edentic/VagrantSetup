@@ -43,13 +43,24 @@ include phpmyadmin
   }
 
   #Setting up nodejs
-  class {'nodejs' :
-    manage_repo => true,
-    version => 'latest'
+  if($install_node == true) {
+      class {'nodejs' :
+        manage_repo => true,
+        version => 'latest'
+      }
   }
 
-  class {'gulpjs':
-    install_node => false
+  #Setting up gulpjs in dev enviroment
+  if($install_node == true) and ($install_gulp == true) {
+    class {'gulpjs':
+      install_node => false,
+      watch => $gulp_watch
+   }
+  }
+
+  #Setting up livereload
+  if($install_node == true) and ($install_gulp == true) and ($install_livereload == true) {
+    class {'livereload': }
   }
 
   #Setup apache
