@@ -4,3 +4,9 @@
 [submodule "modules/mailcatcher"]
 	path = modules/mailcatcher
 	url = https://github.com/fza/puppet-mailcatcher.git
+[submodule "modules/nodejs"]
+	path = modules/nodejs
+	url = https://github.com/javiplx/puppetlabs-nodejs.git
+[submodule "modules/apt"]
+	path = modules/apt
+	url = https://github.com/puppetlabs/puppetlabs-apt.git

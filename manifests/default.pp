@@ -42,6 +42,16 @@ include phpmyadmin
     require => Class['ruby']
   }
 
+  #Setting up nodejs
+  class {'nodejs' :
+    manage_repo => true,
+    version => 'latest'
+  }
+
+  class {'gulpjs':
+    install_node => false
+  }
+
   #Setup apache
   apache::vhost { 'edentic':
       port => '80',
