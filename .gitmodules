@@ -1,0 +1,6 @@
+[submodule "modules/ruby"]
+	path = modules/ruby
+	url = https://github.com/puppetlabs/puppetlabs-ruby.git
+[submodule "modules/mailcatcher"]
+	path = modules/mailcatcher
+	url = https://github.com/fza/puppet-mailcatcher.git
