@@ -42,6 +42,12 @@ include phpmyadmin
     require => Class['ruby']
   }
 
+  #Setting up nodejs
+  class {'nodejs' :
+    manage_repo => true,
+    version => 'latest'
+  }
+
   #Setup apache
   apache::vhost { 'edentic':
       port => '80',
