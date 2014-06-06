@@ -1,4 +1,4 @@
-class gulpjs ($install_node = true) {
+class gulpjs ($install_node = true, $watch = false) {
 
   if($install_node == true) {
     class {'nodejs' :
@@ -17,5 +17,13 @@ class gulpjs ($install_node = true) {
     ensure  => present,
     install_opt => '--save-dev',
     require => Package['gulp']
+  }
+
+  if($watch == true) {
+      exec {'gulp watch':
+        cwd => '/var/www',
+        require => Nodejs::Npm['/var/www:gulp'],
+        logoutput => true
+      }
   }
 }

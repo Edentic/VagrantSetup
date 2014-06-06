@@ -50,6 +50,7 @@ include phpmyadmin
 
   class {'gulpjs':
     install_node => false,
+    watch => true
   }
 
   #Setup apache
