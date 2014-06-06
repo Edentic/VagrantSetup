@@ -21,8 +21,28 @@ include php
 include mysql
 include phpmyadmin
 
-  class {'mailcatcher': }
+  #Set up RUBY
+  package {'build-essential':
+    ensure => 'present'
+  }
 
+  package { 'g++':
+    ensure => 'present'
+  }
+
+  class { 'ruby':
+    ruby_package     => 'ruby1.9.1-full',
+    rubygems_package => 'rubygems1.9.1',
+    gems_version     => 'latest',
+    require => [Package['build-essential'], Package['g++']]
+  }
+
+  #Install mailcatcher
+  class { 'mailcatcher':
+    require => Class['ruby']
+  }
+
+  #Setup apache
   apache::vhost { 'edentic':
       port => '80',
       docroot => '/var/www',
