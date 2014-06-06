@@ -1,6 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure("2") do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -23,6 +20,6 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: "192.168.57.10"
 
   config.vm.synced_folder "", "/var/www", :group => 'www-data', :mount_options => ["dmode=777", "fmode=777"]
-  config.vm.provision :puppet, :module_path => "modules"
+  config.vm.provision :puppet, :module_path => "modules", :run => "always"
   config.vm.hostname = "localhost.dev.edentic.dk"
 end
