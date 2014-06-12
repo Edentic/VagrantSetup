@@ -16,3 +16,9 @@
 [submodule "modules/livereload"]
 	path = modules/livereload
 	url = git@github.com:Edentic/puppet-livereload.git
+[submodule "modules/casperjs"]
+	path = modules/casperjs
+	url = https://kasperbaago@github.com/Edentic/puppet-casperjs.git
+[submodule "modules/phantomjs"]
+	path = modules/phantomjs
+	url = https://kasperbaago@github.com/Edentic/puppet-phantomjs.git
