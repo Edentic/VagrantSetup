@@ -10,3 +10,15 @@
 [submodule "modules/apt"]
 	path = modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
+[submodule "modules/gulpjs"]
+	path = modules/gulpjs
+	url = git@github.com:Edentic/puppet-gulpjs.git
+[submodule "modules/livereload"]
+	path = modules/livereload
+	url = git@github.com:Edentic/puppet-livereload.git
+[submodule "modules/casperjs"]
+	path = modules/casperjs
+	url = https://kasperbaago@github.com/Edentic/puppet-casperjs.git
+[submodule "modules/phantomjs"]
+	path = modules/phantomjs
+	url = https://kasperbaago@github.com/Edentic/puppet-phantomjs.git
