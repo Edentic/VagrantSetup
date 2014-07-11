@@ -8,7 +8,9 @@ $github_token = 'YOUR GITHUB TOKEN'
 
 $server_info_dir = 'info'
 
-$install_node = true
-$install_gulp = true
+$install_node = false
+$install_gulp = false
 $gulp_watch = false
-$install_livereload = true
+$install_livereload = false
+
+$enginex = true

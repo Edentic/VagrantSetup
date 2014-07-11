@@ -3,9 +3,10 @@
 #   This class installs php5.
 #
 class php::install {
-  $packages = ["libapache2-mod-php5", "php5", "php5-cli", "php5-mysql", "php5-curl", "php5-dev", "php5-mcrypt", "php5-gd", "libpcre3-dev"]
+  $packages = ["libapache2-mod-php5", "php5", "php5-cli", "php5-mysql", "php5-curl", "php5-dev", "php5-mcrypt", "php5-gd", "libpcre3-dev", "php5-fpm"]
   package { $packages:
-    ensure => present,
+    ensure => latest,
+    require => Apt::Ppa['ppa:ondrej/php5']
   }
 }
 

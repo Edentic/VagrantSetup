@@ -14,6 +14,11 @@ Package {
 File {
   require => Exec["apt-get update"]
 }
+include apt
+
+apt::ppa { 'ppa:ondrej/php5':
+
+}
 
 include tools
 include apache
@@ -63,11 +68,43 @@ include phpmyadmin
     class {'livereload': }
   }
 
+
   #Setup apache
-  apache::vhost { 'edentic':
+  if($enginex == true) {
+    class {'nginx':
+    }
+
+    nginx::resource::vhost { 'edentic':
+      www_root => '/var/www',
+      ensure => 'present',
+      autoindex => 'on',
+      server_name => ['192.168.57.10'],
+      require => Class['php']
+    }
+
+    nginx::resource::location { "edentic_root":
+      ensure          => present,
+      ssl             => false,
+      ssl_only        => false,
+      vhost           => "edentic",
+      www_root        => "/var/www",
+      location        => '~ \.php$',
+      index_files     => ['index.php', 'index.html', 'index.htm'],
+      proxy           => undef,
+      fastcgi         => 'unix:/var/run/php5-fpm.sock',
+      fastcgi_script  => undef,
+      location_cfg_append => {
+        fastcgi_connect_timeout => '3m',
+        fastcgi_read_timeout    => '3m',
+        fastcgi_send_timeout    => '3m'
+      },
+  }
+} else {
+    apache::vhost { 'edentic':
       port => '80',
       docroot => '/var/www',
       ssl => false,
       serveraliases => ['192.168.*.*', '192.168.57.10'],
       require => Class['apache']
+    }
   }

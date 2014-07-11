@@ -11,12 +11,22 @@ class apache::install {
 }
 
 class apache::service {
-  service { "httpd":
-    name       => apache2,
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
+  if($enginex == false) {
+    service { "httpd":
+      name       => apache2,
+      ensure     => running,
+      enable     => true,
+      hasstatus  => true,
+      hasrestart => true,
+    }
+  } else {
+    service { "httpd":
+      name       => apache2,
+      ensure     => stopped,
+      enable     => true,
+      hasstatus  => true,
+      hasrestart => true,
+    }
   }
 }
 
