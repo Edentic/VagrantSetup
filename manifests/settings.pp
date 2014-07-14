@@ -7,10 +7,11 @@ $github_user = 'YOUR GITHUB USERNAME'
 $github_token = 'YOUR GITHUB TOKEN'
 
 $server_info_dir = 'info'
+$websiteRoot = '/var/www/'
 
-$install_node = false
-$install_gulp = false
+$install_node = true
+$install_gulp = true
 $gulp_watch = false
-$install_livereload = false
+$install_livereload = true
 
 $enginex = true
