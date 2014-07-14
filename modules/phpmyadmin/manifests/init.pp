@@ -11,7 +11,7 @@ class phpmyadmin::install {
 
 class phpmyadmin::config {
   file { "a2en_phpmyadmin":
-    name    => "/etc/apache2/sites-enabled/phpmyadmin",
+    name    => "/etc/apache2/sites-enabled/phpmyadmin.conf",
     ensure  => link,
     target  => "/etc/phpmyadmin/apache.conf",
     notify  => Class["apache::service"],

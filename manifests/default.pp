@@ -80,8 +80,12 @@ include phpmyadmin
       require => Class['apache']
     }
 
+    class {'apache::portconfig':
+      port => '8080'
+    }
+
     class {'nginx':
-      require => Apache::Vhost['000-default.conf']
+      require => [Apache::Vhost['000-default.conf'], Class['apache::portconfig']]
     }
 
     nginx::resource::vhost { 'edentic':

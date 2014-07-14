@@ -24,6 +24,22 @@ class apache::config {
   apache::module { "rewrite": }
 }
 
+class apache::portconfig(
+  $port = '80'
+) {
+  file {
+    "apache_port" :
+    path => '/etc/apache2/ports.conf',
+    ensure => present,
+    content => template('apache/ports.cfg.erb'),
+    mode => '644',
+    group => 'root',
+    owner => 'root',
+    require => Package['httpd'],
+    notify  => Service['httpd']
+  }
+}
+
 class apache {
   include apache::install, apache::service, apache::config
 }
