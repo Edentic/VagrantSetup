@@ -12,6 +12,7 @@ $websiteRoot = '/var/www/'
 $install_node = true
 $install_gulp = true
 $gulp_watch = false
-$install_livereload = true
+$install_livereload = false
 
+#Use NGINX as webserver
 $enginex = true

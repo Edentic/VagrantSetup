@@ -72,7 +72,7 @@ include phpmyadmin
   #Setup apache
   if($enginex == true) {
 
-    apache::vhost { '000-default.conf':
+    apache::vhost { '000-default':
       port => '8080',
       docroot => '/var/noplace',
       ssl => false,
@@ -85,7 +85,7 @@ include phpmyadmin
     }
 
     class {'nginx':
-      require => [Apache::Vhost['000-default.conf'], Class['apache::portconfig']]
+      require => [Apache::Vhost['000-default'], Class['apache::portconfig']]
     }
 
     nginx::resource::vhost { 'edentic':
@@ -130,6 +130,6 @@ include phpmyadmin
       docroot => $websiteRoot,
       ssl => false,
       serveraliases => ['192.168.*.*', '192.168.57.10'],
-      require => Class['apache']
+      require => Package['php5', 'php5-cli']
     }
 }
