@@ -25,7 +25,7 @@ define apache::vhost(
 
   file {
     "vhost_${name}":
-      path    => "/etc/apache2/sites-available/${name}",
+      path    => "/etc/apache2/sites-available/${name}.conf",
       ensure => 'present',
       content => template($template),
       mode    => '644',
@@ -44,7 +44,7 @@ define apache::vhost(
   exec { "enable_apache_vhost" :
     command => "sudo a2ensite ${name}",
     notify  => Service["apache2"],
-     unless  => "test -e /etc/apache2/sites-enabled/${name}",
+     unless  => "test -e /etc/apache2/sites-enabled/${name}.conf",
     require => File["vhost_${name}"];
   }
 

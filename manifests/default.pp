@@ -14,6 +14,11 @@ Package {
 File {
   require => Exec["apt-get update"]
 }
+include apt
+
+apt::ppa { 'ppa:ondrej/php5':
+
+}
 
 include tools
 include apache
@@ -63,11 +68,68 @@ include phpmyadmin
     class {'livereload': }
   }
 
+
   #Setup apache
-  apache::vhost { 'edentic':
-      port => '80',
-      docroot => '/var/www',
+  if($enginex == true) {
+
+    apache::vhost { '000-default':
+      port => '8080',
+      docroot => '/var/noplace',
       ssl => false,
       serveraliases => ['192.168.*.*', '192.168.57.10'],
       require => Class['apache']
+    }
+
+    class {'apache::portconfig':
+      port => '8080'
+    }
+
+    class {'nginx':
+      require => [Apache::Vhost['000-default'], Class['apache::portconfig']]
+    }
+
+    nginx::resource::vhost { 'edentic':
+      www_root => $websiteRoot,
+      ensure => 'present',
+      autoindex => 'off',
+      try_files => ['$uri $uri/ /index.php?$query_string'],
+      server_name => ['192.168.57.10', '192.168.*'],
+      require => Class['php']
+    }
+
+    nginx::resource::location { "edentic_php":
+      ensure          => present,
+      ssl             => false,
+      ssl_only        => false,
+      vhost           => "edentic",
+      www_root        => $websiteRoot,
+      location        => '~ \.php$',
+      index_files     => ['index.php', 'index.html', 'index.htm'],
+      proxy           => undef,
+      fastcgi         => 'unix:/var/run/php5-fpm.sock',
+      fastcgi_script  => undef,
+      location_cfg_append => {
+        fastcgi_connect_timeout => '3m',
+        fastcgi_read_timeout    => '3m',
+        fastcgi_send_timeout    => '3m'
+      },
   }
+
+  nginx::resource::location { "edentic_deny":
+    ensure          => present,
+    www_root        => $websiteRoot,
+    vhost           => "edentic",
+    location        => '~ /\.ht',
+    proxy           => undef,
+    fastcgi_script  => undef,
+    location_deny => ['all']
+  }
+} else {
+    apache::vhost { 'edentic':
+      port => '80',
+      docroot => $websiteRoot,
+      ssl => false,
+      serveraliases => ['192.168.*.*', '192.168.57.10'],
+      require => Package['php5', 'php5-cli']
+    }
+}
