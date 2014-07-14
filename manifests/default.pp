@@ -71,18 +71,29 @@ include phpmyadmin
 
   #Setup apache
   if($enginex == true) {
+
+    apache::vhost { '000-default.conf':
+      port => '8080',
+      docroot => '/var/www',
+      ssl => false,
+      serveraliases => ['192.168.*.*', '192.168.57.10'],
+      require => Class['apache']
+    }
+
     class {'nginx':
+      require => Apache::Vhost['000-default.conf']
     }
 
     nginx::resource::vhost { 'edentic':
       www_root => '/var/www',
       ensure => 'present',
-      autoindex => 'on',
-      server_name => ['192.168.57.10'],
+      autoindex => 'off',
+      try_files => ['$uri $uri/ /index.php?$query_string'],
+      server_name => ['192.168.57.10', '192.168.*'],
       require => Class['php']
     }
 
-    nginx::resource::location { "edentic_root":
+    nginx::resource::location { "edentic_php":
       ensure          => present,
       ssl             => false,
       ssl_only        => false,
@@ -98,6 +109,16 @@ include phpmyadmin
         fastcgi_read_timeout    => '3m',
         fastcgi_send_timeout    => '3m'
       },
+  }
+
+  nginx::resource::location { "edentic_deny":
+    ensure          => present,
+    www_root        => "/var/www",
+    vhost           => "edentic",
+    location        => '~ /\.ht',
+    proxy           => undef,
+    fastcgi_script  => undef,
+    location_deny => ['all']
   }
 } else {
     apache::vhost { 'edentic':

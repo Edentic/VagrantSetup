@@ -11,7 +11,6 @@ class apache::install {
 }
 
 class apache::service {
-  if($enginex == false) {
     service { "httpd":
       name       => apache2,
       ensure     => running,
@@ -19,15 +18,6 @@ class apache::service {
       hasstatus  => true,
       hasrestart => true,
     }
-  } else {
-    service { "httpd":
-      name       => apache2,
-      ensure     => stopped,
-      enable     => true,
-      hasstatus  => true,
-      hasrestart => true,
-    }
-  }
 }
 
 class apache::config {
