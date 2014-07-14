@@ -74,7 +74,7 @@ include phpmyadmin
 
     apache::vhost { '000-default.conf':
       port => '8080',
-      docroot => '/var/www',
+      docroot => '/var/noplace',
       ssl => false,
       serveraliases => ['192.168.*.*', '192.168.57.10'],
       require => Class['apache']
@@ -89,7 +89,7 @@ include phpmyadmin
     }
 
     nginx::resource::vhost { 'edentic':
-      www_root => '/var/www',
+      www_root => $websiteRoot,
       ensure => 'present',
       autoindex => 'off',
       try_files => ['$uri $uri/ /index.php?$query_string'],
@@ -102,7 +102,7 @@ include phpmyadmin
       ssl             => false,
       ssl_only        => false,
       vhost           => "edentic",
-      www_root        => "/var/www",
+      www_root        => $websiteRoot,
       location        => '~ \.php$',
       index_files     => ['index.php', 'index.html', 'index.htm'],
       proxy           => undef,
@@ -117,7 +117,7 @@ include phpmyadmin
 
   nginx::resource::location { "edentic_deny":
     ensure          => present,
-    www_root        => "/var/www",
+    www_root        => $websiteRoot,
     vhost           => "edentic",
     location        => '~ /\.ht',
     proxy           => undef,
@@ -127,9 +127,9 @@ include phpmyadmin
 } else {
     apache::vhost { 'edentic':
       port => '80',
-      docroot => '/var/www',
+      docroot => $websiteRoot,
       ssl => false,
       serveraliases => ['192.168.*.*', '192.168.57.10'],
       require => Class['apache']
     }
-  }
+}
